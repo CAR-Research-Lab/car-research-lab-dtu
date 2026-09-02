@@ -135,7 +135,7 @@ export default function PeopleSection() {
         <div className="relative py-12 mb-24 flex flex-col items-center">
           
           <span className="text-[10px] font-black tracking-widest uppercase text-primary-700 mb-10 text-center block">
-            Click on any profile to view details
+            Click on any profile to view the full directory
           </span>
 
           {/* Staggered Honeycomb Grid Container */}
@@ -146,7 +146,7 @@ export default function PeopleSection() {
               {people.slice(0, 3).map((person) => (
                 <div
                   key={person.name}
-                  onClick={() => router.push(`/people/${generateSlug(person.name)}`)}
+                  onClick={() => router.push(`/people`)}
                   className="relative cursor-pointer transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:z-10 group"
                 >
                   <div
@@ -183,7 +183,7 @@ export default function PeopleSection() {
               {people.slice(3, 6).map((person) => (
                 <div
                   key={person.name}
-                  onClick={() => router.push(`/people/${generateSlug(person.name)}`)}
+                  onClick={() => router.push(`/people`)}
                   className="relative cursor-pointer transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:z-10 group"
                 >
                   <div
