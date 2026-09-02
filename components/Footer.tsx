@@ -68,7 +68,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Computer Automation and Research Laboratory. All rights reserved.
           </span>
           <span className="text-[10px] font-bold text-accent-200 tracking-wider">
-            Website Developed by: <span className="text-white hover:text-accent-100 transition-colors">Ravi Kumar Srivastava</span>, Computer Automation and Research Laboratory (CAR)
+            Website Developed by: <a href="https://www.linkedin.com/in/ravi-kumar-srivastava" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent-100 transition-colors">Ravi Kumar Srivastava</a>, Computer Automation and Research Laboratory (CAR)
           </span>
         </div>
 

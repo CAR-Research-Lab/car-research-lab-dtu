@@ -4,35 +4,43 @@ import React, { useState, useEffect } from "react";
 import UniversityLogo from "./UniversityLogo";
 import LogoCAR from "./LogoCAR";
 import { Menu, X } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const router = useRouter();
+  const pathname = usePathname();
 
   const navLinks = [
-    { label: "Our Vision", href: "#vision", id: "vision" },
-    { label: "Research", href: "#research", id: "research" },
-    { label: "People", href: "#people", id: "people" },
-    { label: "Collaboration", href: "#collaboration", id: "collaboration" },
-    { label: "Projects & Updates", href: "#projects", id: "projects" },
-    { label: "Contact", href: "#contact", id: "contact" },
+    { label: "Our Vision", href: "/#vision", id: "vision" },
+    { label: "Research", href: "/publications", id: "research" },
+    { label: "People", href: "/people", id: "people" },
+    { label: "Collaboration", href: "/#collaboration", id: "collaboration" },
+    { label: "Projects & Updates", href: "/#projects", id: "projects" },
+    { label: "Contact", href: "/#contact", id: "contact" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      
+      // Only do section active detection if on homepage
+      if (pathname !== "/") return;
 
       // Detect active section on scroll
       const scrollPosition = window.scrollY + 100;
       for (const link of navLinks) {
-        const el = document.getElementById(link.id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(link.id);
-            break;
+        if (link.href.startsWith("/#")) {
+          const el = document.getElementById(link.id);
+          if (el) {
+            const top = el.offsetTop;
+            const height = el.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              setActiveSection(link.id);
+              break;
+            }
           }
         }
       }
@@ -40,11 +48,27 @@ export default function Header() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const id = href.replace("#", "");
+    
+    // If not on homepage and trying to access an anchor, navigate to home first
+    if (href.startsWith("/#") && pathname !== "/") {
+       router.push(href);
+       setMobileMenuOpen(false);
+       return;
+    }
+    
+    // If it's a direct page link
+    if (!href.startsWith("/#")) {
+      router.push(href);
+      setMobileMenuOpen(false);
+      return;
+    }
+
+    // Scroll behavior for anchors on the same page
+    const id = href.replace("/#", "");
     const element = document.getElementById(id);
     if (element) {
       const offset = 80; // height of header
@@ -79,10 +103,10 @@ export default function Header() {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}>
-            <div className="flex items-center space-x-1">
-              <UniversityLogo size={45} className="group-hover:scale-105" />
-              <div className="h-8 w-[1px] bg-charcoal-300/60 mx-1" />
-              <LogoCAR size={50} className="hidden sm:block opacity-90 group-hover:opacity-100" />
+            <div className="flex items-center space-x-2">
+              <UniversityLogo size={70} className="group-hover:scale-105 transition-transform duration-300" />
+              <div className="h-12 w-[1px] bg-charcoal-300/60 mx-2" />
+              <LogoCAR size={80} className="hidden sm:block opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             
             <div className="flex flex-col">

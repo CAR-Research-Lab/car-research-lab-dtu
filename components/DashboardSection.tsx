@@ -13,21 +13,28 @@ import {
   Calendar,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function DashboardSection() {
   const [activeTab, setActiveTab] = useState("research");
 
+  const router = useRouter();
+  const pathname = usePathname();
+
   const sidebarLinks = [
-    { label: "Home", href: "#hero", id: "home" },
-    { label: "Research", href: "#research", id: "research" },
-    { label: "People", href: "#people", id: "people" },
-    { label: "Collaboration", href: "#collaboration", id: "collaboration" },
-    { label: "Projects & Updates", href: "#projects", id: "projects" },
-    { label: "Contact", href: "#contact", id: "contact" },
+    { label: "Home", href: "/#hero", id: "home" },
+    { label: "Research", href: "/publications", id: "research" },
+    { label: "People", href: "/people", id: "people" },
+    { label: "Collaboration", href: "/#collaboration", id: "collaboration" },
+    { label: "Projects & Updates", href: "/#projects", id: "projects" },
+    { label: "Contact", href: "/#contact", id: "contact" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
+      // Only do section active detection if on homepage
+      if (pathname !== "/") return;
+
       const scrollPos = window.scrollY + 200;
 
       // Check which section is in view
@@ -54,7 +61,7 @@ export default function DashboardSection() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   const handleSidebarClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -62,7 +69,21 @@ export default function DashboardSection() {
     id: string,
   ) => {
     e.preventDefault();
-    const targetId = href.replace("#", "");
+
+    // If not on homepage and trying to access an anchor, navigate to home first
+    if (href.startsWith("/#") && pathname !== "/") {
+       router.push(href);
+       return;
+    }
+    
+    // If it's a direct page link
+    if (!href.startsWith("/#")) {
+      router.push(href);
+      return;
+    }
+
+    // Scroll behavior for anchors on the same page
+    const targetId = href.replace("/#", "");
     const element = document.getElementById(targetId);
     if (element) {
       const offset = 80;

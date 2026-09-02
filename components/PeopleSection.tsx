@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { User, Award, Mail, BookOpen, GraduationCap, MapPin, Globe, X, Link } from "lucide-react";
+import React from "react";
+import { User, Award, Mail, BookOpen, GraduationCap, MapPin, Globe, X, Link as LinkIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface Profile {
   name: string;
@@ -17,7 +18,6 @@ interface Profile {
 }
 
 export default function PeopleSection() {
-  const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
 
   const people: Profile[] = [
     {
@@ -106,18 +106,29 @@ export default function PeopleSection() {
     { name: "ISRO", type: "Space Agency", location: "India" },
   ];
 
+  const router = useRouter();
+  const generateSlug = (name: string) => name.toLowerCase().replace(/[\s.]+/g, '-');
+
   return (
     <section id="people" className="w-full bg-white py-24 border-b border-charcoal-200/50 scroll-mt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-16 border-l-4 border-primary-700 pl-4">
-          <h2 className="text-3xl font-black uppercase tracking-wider text-charcoal-900">
-            Our Research Community
-          </h2>
-          <p className="text-xs font-semibold text-charcoal-500 uppercase tracking-widest mt-1">
-            Faculty, Scholars, and Institutional Network
-          </p>
+        <div className="mb-16 border-l-4 border-primary-700 pl-4 flex justify-between items-end">
+          <div>
+            <h2 className="text-3xl font-black uppercase tracking-wider text-charcoal-900">
+              Our Research Community
+            </h2>
+            <p className="text-xs font-semibold text-charcoal-500 uppercase tracking-widest mt-1">
+              Faculty, Scholars, and Institutional Network
+            </p>
+          </div>
+          <button 
+            onClick={() => router.push('/people')}
+            className="hidden sm:inline-flex items-center text-[10px] font-black uppercase tracking-widest text-primary-700 hover:text-primary-800 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded transition-colors"
+          >
+            View Full Directory <LinkIcon size={12} className="ml-2" />
+          </button>
         </div>
 
         {/* Stanford SAIL Format Honeycomb Hexagon Grid */}
@@ -135,7 +146,7 @@ export default function PeopleSection() {
               {people.slice(0, 3).map((person) => (
                 <div
                   key={person.name}
-                  onClick={() => setSelectedProfile(person)}
+                  onClick={() => router.push(`/people/${generateSlug(person.name)}`)}
                   className="relative cursor-pointer transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:z-10 group"
                 >
                   <div
@@ -172,7 +183,7 @@ export default function PeopleSection() {
               {people.slice(3, 6).map((person) => (
                 <div
                   key={person.name}
-                  onClick={() => setSelectedProfile(person)}
+                  onClick={() => router.push(`/people/${generateSlug(person.name)}`)}
                   className="relative cursor-pointer transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:z-10 group"
                 >
                   <div
@@ -202,97 +213,14 @@ export default function PeopleSection() {
             </div>
 
           </div>
+          
+          <button 
+            onClick={() => router.push('/people')}
+            className="sm:hidden mt-12 items-center text-[10px] font-black uppercase tracking-widest text-primary-700 hover:text-primary-800 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded transition-colors inline-flex"
+          >
+            View Full Directory <LinkIcon size={12} className="ml-2" />
+          </button>
         </div>
-
-        {/* 2. Interactive Profile Modal (matching click profile mockup) */}
-        {selectedProfile && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeIn">
-            
-            {/* Modal Box */}
-            <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 relative border border-charcoal-200/60 flex flex-col md:flex-row gap-8 items-center text-charcoal-900 animate-slideUp">
-              
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedProfile(null)}
-                className="absolute top-4 right-4 text-charcoal-400 hover:text-charcoal-700 hover:scale-110 transition-all cursor-pointer p-1"
-              >
-                <X size={22} />
-              </button>
-
-              {/* Left Side: Large Colored Hexagon Portrait */}
-              <div className="flex-shrink-0 relative">
-                <div
-                  className="w-36 h-40 md:w-44 md:h-48 bg-gradient-to-br shadow-lg flex items-center justify-center text-white"
-                  style={{
-                    clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-                  }}
-                >
-                  <div className={`w-full h-full bg-gradient-to-br ${selectedProfile.avatarBg} flex flex-col items-center justify-center p-4`}>
-                    <span className="text-3xl font-black font-mono tracking-widest text-accent-100">
-                      {selectedProfile.initials}
-                    </span>
-                    <span className="text-[8px] uppercase tracking-widest font-black text-accent-200/80 mt-2">
-                      CAR Lab
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Side: Details & Biography */}
-              <div className="flex-grow space-y-4 text-center md:text-left">
-                <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-primary-700 bg-primary-50 px-2.5 py-1 rounded">
-                    {selectedProfile.role}
-                  </span>
-                  <h3 className="text-xl md:text-2xl font-black text-charcoal-900 tracking-wide uppercase mt-2">
-                    {selectedProfile.name}
-                  </h3>
-                  <p className="text-xs font-bold text-accent-700 uppercase tracking-wider mt-1">
-                    {selectedProfile.focus}
-                  </p>
-                </div>
-
-                <p className="text-xs text-charcoal-500 leading-relaxed font-medium">
-                  {selectedProfile.bio}
-                </p>
-
-                <div className="pt-2 flex flex-wrap gap-1.5 justify-center md:justify-start">
-                  {selectedProfile.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[9.5px] font-bold text-primary-700 bg-primary-50 px-2 py-0.5 rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Direct Action Link (Read More style from mockup) */}
-                <div className="pt-4 border-t border-charcoal-100 flex items-center justify-between gap-4">
-                  <span className="text-[10px] font-semibold text-charcoal-400 font-mono">
-                    {selectedProfile.email}
-                  </span>
-                  
-                  <div className="flex items-center space-x-3">
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        alert(`Opening complete research profile of ${selectedProfile.name}`);
-                      }}
-                      className="text-xs font-black text-primary-700 hover:text-primary-800 transition-colors uppercase tracking-widest flex items-center gap-1"
-                    >
-                      Read More <Link size={12} />
-                    </a>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-        )}
 
         {/* 3. Strategic Global Collaborations Track */}
         <div id="collaboration" className="scroll-mt-24 pt-8 border-t border-charcoal-200/50">
