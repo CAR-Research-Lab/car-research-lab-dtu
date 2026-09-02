@@ -54,12 +54,20 @@ export default async function PersonProfile({ params }: { params: Promise<{ slug
                   }}
                 >
                   <div className="absolute inset-2 border-2 border-white/20 group-hover:border-accent-200/50 transition-colors" style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }} />
-                  <div className="text-center">
-                    <span className="text-5xl font-black font-mono tracking-widest text-accent-100">
-                      {person.initials || person.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2)}
-                    </span>
-                    <p className="text-[10px] uppercase tracking-widest font-black text-accent-200 mt-3">CAR Lab</p>
-                  </div>
+                  {person.image?.url ? (
+                    <img
+                      src={person.image.url}
+                      alt={person.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  ) : (
+                    <div className="text-center">
+                      <span className="text-5xl font-black font-mono tracking-widest text-accent-100">
+                        {person.initials || person.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2)}
+                      </span>
+                      <p className="text-[10px] uppercase tracking-widest font-black text-accent-200 mt-3">CAR Lab</p>
+                    </div>
+                  )}
                 </div>
               </div>
 

@@ -17,6 +17,7 @@ type Person = {
   bio: string;
   category: string;
   initials: string;
+  image?: { url: string };
   avatarBg?: string;
 };
 
@@ -101,12 +102,20 @@ export default function PeopleClient({ people }: { people: Person[] }) {
                                 clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
                               }}
                             >
-                              <div className={`w-full h-full bg-gradient-to-br ${avatarBg} flex flex-col items-center justify-center text-white p-4 relative`}>
-                                <span className="text-xl font-bold font-mono tracking-wider text-accent-100/90 group-hover:scale-110 transition-transform duration-300">
-                                  {member.initials}
-                                </span>
-                                <div className="absolute inset-1 border border-white/10 group-hover:border-accent-200/30 transition-colors pointer-events-none" style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }} />
-                              </div>
+                              {member.image?.url ? (
+                                  <img
+                                    src={member.image.url}
+                                    alt={member.name}
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                  />
+                                ) : (
+                                  <div className={`w-full h-full bg-gradient-to-br ${avatarBg} flex flex-col items-center justify-center text-white p-4 relative`}>
+                                    <span className="text-xl font-bold font-mono tracking-wider text-accent-100/90 group-hover:scale-110 transition-transform duration-300">
+                                      {member.initials || member.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2)}
+                                    </span>
+                                    <div className="absolute inset-1 border border-white/10 group-hover:border-accent-200/30 transition-colors pointer-events-none" style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }} />
+                                  </div>
+                                )}
                             </div>
                           </motion.div>
                           

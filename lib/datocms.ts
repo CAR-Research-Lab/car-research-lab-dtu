@@ -93,6 +93,9 @@ export async function getPeople() {
         bio
         category
         initials
+        image {
+          url
+        }
       }
     }
   `;
