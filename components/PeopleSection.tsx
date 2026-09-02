@@ -9,89 +9,21 @@ interface Profile {
   role: string;
   focus: string;
   email: string;
-  avatarBg: string;
   initials: string;
   bio: string;
-  tags: string[];
-  github?: string;
-  linkedin?: string;
+  category: string;
+  image?: { url: string };
 }
 
-export default function PeopleSection() {
-
-  const people: Profile[] = [
-    {
-      name: "Prof. Rahul Kataria",
-      role: "Faculty & Lab Head",
-      focus: "Autonomous Systems & Cyber-Physical Safety",
-      email: "rahul.kataria@dtu.ac.in",
-      avatarBg: "from-primary-800 to-primary-950",
-      initials: "RK",
-      bio: "Professor Rahul Kataria is the founder and Principal Investigator of the Computer Automation and Research Laboratory (CAR) at DTU. He has published over 150 peer-reviewed papers in high-impact journals and conferences. His vision centers on establishing mathematical safety guarantees for automated co-bots and secure, privacy-preserving federated intelligence grids.",
-      tags: ["Safety Control", "Decentralized AI", "Cobots"],
-      github: "#",
-      linkedin: "#",
-    },
-    {
-      name: "Avdhesh Sharma",
-      role: "PhD Scholar",
-      focus: "Security & Federated Learning",
-      email: "avdhesh.sharma@dtu.ac.in",
-      avatarBg: "from-primary-600 to-primary-800",
-      initials: "AS",
-      bio: "Avdhesh is a senior PhD scholar researching decentralized cryptography and privacy guarantees under the SECURE-FL framework. His work mitigates adversarial poisoning attacks in federated machine learning layers.",
-      tags: ["SECURE-FL", "IoT Security", "Edge AI"],
-      github: "#",
-      linkedin: "#",
-    },
-    {
-      name: "Sonika Dahiya",
-      role: "PhD Scholar",
-      focus: "Human-AI Interaction & Explainable AI",
-      email: "sonika.dahiya@dtu.ac.in",
-      avatarBg: "from-accent-600 to-accent-800",
-      initials: "SD",
-      bio: "Sonika's research bridges the gap between robotic actuation and human cognition. She designs explanation interfaces that render deep neural decision-making pipelines transparent to human operators during physical assistant tasks.",
-      tags: ["Cognitive Science", "HCI", "XAI"],
-      github: "#",
-      linkedin: "#",
-    },
-    {
-      name: "Priyanshu Sharma",
-      role: "PhD Scholar",
-      focus: "Swarm Robotics & Path Optimization",
-      email: "priyanshu.sharma@dtu.ac.in",
-      avatarBg: "from-charcoal-700 to-charcoal-900",
-      initials: "PS",
-      bio: "Priyanshu focuses on swarm drone dynamics and automated resource mapping under the CAR-AGRI-DRONE project. His path planning controllers operate autonomously in dense dynamic obstacle environments.",
-      tags: ["Swarm Control", "Cobots", "Path Planning"],
-      github: "#",
-      linkedin: "#",
-    },
-    {
-      name: "Divya Vanshika",
-      role: "PhD Scholar",
-      focus: "Robust Neural Classifiers",
-      email: "divya.v@dtu.ac.in",
-      avatarBg: "from-primary-700 to-accent-600",
-      initials: "DV",
-      bio: "Divya is developing defensive neural models resilient to adversarial input perturbations. Her focus lies in physical verification tests for deep vision models deployed on autonomous vehicles.",
-      tags: ["Neural Safety", "Vision Models", "Adversarial ML"],
-      github: "#",
-      linkedin: "#",
-    },
-    {
-      name: "Rohan Malhotra",
-      role: "PhD Scholar",
-      focus: "Reinforcement Learning Controls",
-      email: "rohan.m@dtu.ac.in",
-      avatarBg: "from-accent-500 to-primary-900",
-      initials: "RM",
-      bio: "Rohan works on robotic arm joint feedback control loops using continuous reinforcement learning. His algorithms optimize energy expenditure and smooth trajectory paths during payload lifting.",
-      tags: ["RL Control", "Joint Feedback", "Actuators"],
-      github: "#",
-      linkedin: "#",
-    },
+export default function PeopleSection({ people = [] }: { people?: Profile[] }) {
+  // Helper to assign a random color gradient to people if not provided
+  const gradients = [
+    "from-primary-600 to-primary-800",
+    "from-accent-600 to-accent-800",
+    "from-charcoal-700 to-charcoal-900",
+    "from-primary-700 to-accent-600",
+    "from-emerald-600 to-emerald-800",
+    "from-blue-600 to-blue-800",
   ];
 
   const collaborations = [
@@ -156,16 +88,24 @@ export default function PeopleSection() {
                     }}
                   >
                     {/* Hexagon background pattern */}
-                    <div className={`w-full h-full bg-gradient-to-br ${person.avatarBg} flex flex-col items-center justify-center text-white p-4 relative`}>
-                      <span className="text-lg md:text-xl font-bold font-mono tracking-wider text-accent-100/90 group-hover:scale-110 transition-transform duration-300">
-                        {person.initials}
-                      </span>
-                      <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-center mt-3 leading-tight max-w-[80%]">
-                        {person.name.split(" ").slice(-1)[0]}
-                      </span>
-                      {/* Interactive glowing border inside */}
-                      <div className="absolute inset-1 border border-white/10 group-hover:border-accent-200/30 transition-colors pointer-events-none" style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }} />
-                    </div>
+                    {person.image?.url ? (
+                      <img
+                        src={person.image.url}
+                        alt={person.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className={`w-full h-full bg-gradient-to-br ${gradients[idx % gradients.length]} flex flex-col items-center justify-center text-white p-4 relative`}>
+                        <span className="text-lg md:text-xl font-bold font-mono tracking-wider text-accent-100/90 group-hover:scale-110 transition-transform duration-300">
+                          {person.initials || person.name.split(" ").map(n => n[0]).join("").substring(0,2)}
+                        </span>
+                        <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-center mt-3 leading-tight max-w-[80%]">
+                          {person.name.split(" ").slice(-1)[0]}
+                        </span>
+                        {/* Interactive glowing border inside */}
+                        <div className="absolute inset-1 border border-white/10 group-hover:border-accent-200/30 transition-colors pointer-events-none" style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }} />
+                      </div>
+                    )}
                   </div>
                   
                   {/* Subtle Name Tag below hexagon */}
@@ -192,15 +132,23 @@ export default function PeopleSection() {
                       clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
                     }}
                   >
-                    <div className={`w-full h-full bg-gradient-to-br ${person.avatarBg} flex flex-col items-center justify-center text-white p-4 relative`}>
-                      <span className="text-lg md:text-xl font-bold font-mono tracking-wider text-accent-100/90 group-hover:scale-110 transition-transform duration-300">
-                        {person.initials}
-                      </span>
-                      <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-center mt-3 leading-tight max-w-[80%]">
-                        {person.name.split(" ").slice(-1)[0]}
-                      </span>
-                      <div className="absolute inset-1 border border-white/10 group-hover:border-accent-200/30 transition-colors pointer-events-none" style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }} />
-                    </div>
+                    {person.image?.url ? (
+                      <img
+                        src={person.image.url}
+                        alt={person.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className={`w-full h-full bg-gradient-to-br ${gradients[(idx + 3) % gradients.length]} flex flex-col items-center justify-center text-white p-4 relative`}>
+                        <span className="text-lg md:text-xl font-bold font-mono tracking-wider text-accent-100/90 group-hover:scale-110 transition-transform duration-300">
+                          {person.initials || person.name.split(" ").map(n => n[0]).join("").substring(0,2)}
+                        </span>
+                        <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-center mt-3 leading-tight max-w-[80%]">
+                          {person.name.split(" ").slice(-1)[0]}
+                        </span>
+                        <div className="absolute inset-1 border border-white/10 group-hover:border-accent-200/30 transition-colors pointer-events-none" style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }} />
+                      </div>
+                    )}
                   </div>
                   
                   <div className="absolute inset-x-0 bottom-4 text-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">

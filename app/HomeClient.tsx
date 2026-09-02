@@ -11,7 +11,7 @@ import ContactSection from "@/components/ContactSection";
 import UpdatesWidget from "@/components/UpdatesWidget";
 import Footer from "@/components/Footer";
 
-export default function HomeClient({ updates }: { updates: any }) {
+export default function HomeClient({ updates, people }: { updates: any, people: any }) {
   const coreValues = [
     {
       title: "Safety",
@@ -184,7 +184,7 @@ export default function HomeClient({ updates }: { updates: any }) {
         <DashboardSection />
 
         {/* 6. People & Collaborations Section */}
-        <PeopleSection />
+        <PeopleSection people={people} />
 
         {/* 7. Contact Section */}
         <ContactSection />
