@@ -75,7 +75,7 @@ export default function PeopleSection({ people = [] }: { people?: Profile[] }) {
             
             {/* Row 1 (Odd Row - 3 Hexagons) */}
             <div className="flex items-center gap-4 md:gap-8">
-              {people.slice(0, 3).map((person) => (
+              {people.slice(0, 3).map((person, idx) => (
                 <div
                   key={person.name}
                   onClick={() => router.push(`/people`)}
@@ -120,7 +120,7 @@ export default function PeopleSection({ people = [] }: { people?: Profile[] }) {
 
             {/* Row 2 (Even Row - 3 Hexagons, staggered offset) */}
             <div className="flex items-center gap-4 md:gap-8">
-              {people.slice(3, 6).map((person) => (
+              {people.slice(3, 6).map((person, idx) => (
                 <div
                   key={person.name}
                   onClick={() => router.push(`/people`)}

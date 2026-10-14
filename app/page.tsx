@@ -1,9 +1,12 @@
 import React from "react";
 import HomeClient from "./HomeClient";
-import { getUpdates, getPeople } from "@/lib/datocms";
+import { getUpdates, getPeople, getHomeBg } from "@/lib/datocms";
 
 export default async function Home() {
-  const updates = await getUpdates();
-  const people = await getPeople();
-  return <HomeClient updates={updates} people={people} />;
+  const [updates, people, homeBg] = await Promise.all([
+    getUpdates(),
+    getPeople(),
+    getHomeBg(),
+  ]);
+  return <HomeClient updates={updates} people={people} homeBg={homeBg} />;
 }

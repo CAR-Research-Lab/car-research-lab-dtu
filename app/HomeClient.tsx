@@ -11,7 +11,15 @@ import ContactSection from "@/components/ContactSection";
 import UpdatesWidget from "@/components/UpdatesWidget";
 import Footer from "@/components/Footer";
 
-export default function HomeClient({ updates, people }: { updates: any, people: any }) {
+export default function HomeClient({ 
+  updates, 
+  people, 
+  homeBg 
+}: { 
+  updates: any; 
+  people: any; 
+  homeBg?: string | null;
+}) {
   const coreValues = [
     {
       title: "Safety",
@@ -71,7 +79,7 @@ export default function HomeClient({ updates, people }: { updates: any, people: 
           {/* Background Image with Dark Contrast Overlay */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700 transform scale-105"
-            style={{ backgroundImage: `url('/dtu_campus_facade.png')` }}
+            style={{ backgroundImage: `url('${homeBg || "/dtu_campus_facade.png"}')` }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-charcoal-900/75 to-primary-950/45" />
 
