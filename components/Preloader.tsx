@@ -17,25 +17,33 @@ export default function Preloader() {
       return;
     }
 
-    // Fake loading progress on first site visit or hard refresh
+    // Lock body scroll while preloader is active to prevent page showing through
+    document.body.style.overflow = "hidden";
+
+    // Smooth loading progress lasting ~2.2 - 2.5 seconds total
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
           setTimeout(() => {
             setLoading(false);
+            document.body.style.overflow = "";
             if (typeof window !== "undefined") {
               sessionStorage.setItem("car_lab_preloader_run", "true");
             }
-          }, 500);
+          }, 600);
           return 100;
         }
-        const diff = Math.random() * 20 + 5;
+        // Increment slower to keep animation smoothly visible for 2+ seconds
+        const diff = Math.random() * 7 + 3.5;
         return Math.min(prev + diff, 100);
       });
-    }, 100);
+    }, 110);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      document.body.style.overflow = "";
+    };
   }, []);
 
   return (
@@ -43,8 +51,8 @@ export default function Preloader() {
       {loading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, y: -20, transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white px-6"
+          exit={{ opacity: 0, scale: 0.98, transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } }}
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white px-6"
         >
           {/* Decorative grid overlay for technical look */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
