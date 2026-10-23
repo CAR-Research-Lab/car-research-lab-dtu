@@ -40,7 +40,7 @@ export default function Footer() {
           </p>
 
           <p className="max-w-xl text-xs text-primary-300/80 leading-relaxed mt-4 font-medium">
-            Computer Automation and Research Laboratory (CAR) is a premier academic research center driving secure, ethical, and human-centric artificial intelligence and automated systems.
+            Computing Automation and Research Laboratory (CAR) is a premier academic research center driving secure, ethical, and human-centric artificial intelligence and automated systems.
           </p>
         </div>
 
@@ -65,10 +65,10 @@ export default function Footer() {
         {/* Developer Signature Bar */}
         <div className="pt-8 border-t border-primary-800/60 text-center flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="text-[10px] text-primary-300 font-medium tracking-wide">
-            © {new Date().getFullYear()} Computer Automation and Research Laboratory. All rights reserved.
+            © {new Date().getFullYear()} Computing Automation and Research Laboratory. All rights reserved.
           </span>
           <span className="text-[10px] font-bold text-accent-200 tracking-wider">
-            Website Developed by: <a href="https://www.linkedin.com/in/ravi-kumar-srivastava" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent-100 transition-colors">Ravi Kumar Srivastava</a>, Computer Automation and Research Laboratory (CAR)
+            Website Developed by: <a href="https://www.linkedin.com/in/ravi-kumar-srivastava" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent-100 transition-colors">Ravi Kumar Srivastava</a>, Computing Automation and Research Laboratory (CAR)
           </span>
         </div>
 

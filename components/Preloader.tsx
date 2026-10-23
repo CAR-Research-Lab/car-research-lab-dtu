@@ -87,7 +87,7 @@ export default function Preloader() {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="mt-2 text-xl md:text-2xl font-black text-charcoal-900 tracking-wide"
             >
-              Computer Automation and Research Laboratory
+              Computing Automation and Research Laboratory
             </motion.h2>
 
             <motion.p
@@ -116,16 +116,6 @@ export default function Preloader() {
             >
               {Math.round(progress)}% Loaded
             </motion.span>
-
-            {/* Vision statement */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.8 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="mt-8 text-xs md:text-sm font-medium italic text-charcoal-500 leading-relaxed border-t border-charcoal-100 pt-4"
-            >
-              "Connecting Research, Shaping Humanity... Fostering Global Collaboration"
-            </motion.p>
           </div>
 
           {/* Tiny CAR Monogram at absolute bottom */}

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CAR | Computer Automation and Research Laboratory | Delhi Technological University",
-  description: "Official web platform of the Computer Automation and Research Laboratory (CAR) at Delhi Technological University (DTU). Pioneering secure, robust, and humane intelligence frameworks since 1941.",
+  title: "CAR | Computing Automation and Research Laboratory | Delhi Technological University",
+  description: "Official web platform of the Computing Automation and Research Laboratory (CAR) at Delhi Technological University (DTU). Pioneering secure, robust, and humane intelligence frameworks since 1941.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },

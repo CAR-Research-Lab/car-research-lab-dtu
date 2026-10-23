@@ -59,7 +59,7 @@ export default function PeopleClient({ people }: { people: Person[] }) {
               Our Community
             </h1>
             <p className="text-sm font-semibold text-charcoal-500 uppercase tracking-widest mt-2 max-w-3xl leading-relaxed">
-              Meet the brilliant minds driving innovation at the Computer Automation and Research Laboratory.
+              Meet the brilliant minds driving innovation at the Computing Automation and Research Laboratory.
             </p>
           </div>
 

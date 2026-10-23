@@ -157,7 +157,7 @@ export default function HomeClient({
               </h2>
               <div className="w-16 h-1 bg-primary-700 mx-auto my-4 rounded-full" />
               <p className="text-xs md:text-sm text-charcoal-500 font-medium leading-relaxed">
-                The Computer Automation and Research Laboratory (CAR) at DTU is a premier center dedicated to pioneering secure, efficient, and ethical artificial intelligence, transforming academic research into real-world applications for societal good. We foster global partnerships to align automation with human values.
+                The Computing Automation and Research Laboratory (CAR) at DTU is a premier center dedicated to pioneering secure, efficient, and ethical artificial intelligence, transforming academic research into real-world applications for societal good. We foster global partnerships to align automation with human values.
               </p>
             </div>
 

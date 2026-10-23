@@ -1,6 +1,6 @@
 # AI Assistant Guidelines for CAR Lab Website
 
-This repository represents the official website for the Computer Automation and Research (CAR) Laboratory at Delhi Technological University.
+This repository represents the official website for the Computing Automation and Research (CAR) Laboratory at Delhi Technological University.
 It is built with **Next.js (App Router, React 19)**, **Tailwind CSS v4**, and **Framer Motion**.
 
 When the Lab Manager asks you (Claude / ChatGPT) to make updates, strictly follow these guidelines:
