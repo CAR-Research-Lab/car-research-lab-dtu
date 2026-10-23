@@ -74,7 +74,7 @@ export default function HomeClient({
       {/* 2. Global Header */}
       <Header />
 
-      <main className="flex-grow pt-16">
+      <main className="flex-grow pt-20 sm:pt-24">
         
         {/* 3. Hero Section (featuring campus Red-Brick facade image) */}
         <section id="hero" className="relative h-[85vh] min-h-[500px] flex items-center justify-center overflow-hidden">

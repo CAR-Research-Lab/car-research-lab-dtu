@@ -51,20 +51,16 @@ export default function Preloader() {
 
           {/* Central content container */}
           <div className="relative z-10 flex flex-col items-center max-w-2xl text-center">
-            {/* Circular container holding DTU Seal & CAR logo */}
+            {/* Container holding DTU Seal & CAR Lab Logo */}
             <motion.div
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="relative flex items-center justify-center p-6 mb-8 rounded-full bg-charcoal-50 ring-1 ring-primary-100 glow-maroon"
+              className="relative flex items-center justify-center gap-5 sm:gap-7 px-8 py-5 mb-8 rounded-3xl bg-charcoal-50 ring-1 ring-primary-100 glow-maroon shadow-sm"
             >
-              {/* Spinning tech border */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 border border-dashed rounded-full border-primary-500/30"
-              />
-              <UniversityLogo size={140} />
+              <UniversityLogo size={105} />
+              <div className="h-14 w-[1.5px] bg-charcoal-300/60" />
+              <LogoCAR size={120} />
             </motion.div>
 
             {/* Typography Section */}
@@ -85,6 +81,15 @@ export default function Preloader() {
             >
               Computer Automation and Research Laboratory
             </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.6 }}
+              className="mt-1 text-xs md:text-sm font-bold uppercase tracking-wider text-charcoal-600"
+            >
+              Department of Computer Science and Engineering
+            </motion.p>
 
             {/* Sleek linear progress bar container */}
             <div className="relative w-64 md:w-80 h-[3px] bg-charcoal-100 rounded-full overflow-hidden mt-6">

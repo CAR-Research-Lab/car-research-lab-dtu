@@ -91,33 +91,33 @@ export default function Header() {
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
           ? "glassmorphism shadow-sm py-2"
-          : "bg-white/40 backdrop-blur-sm py-4 border-b border-transparent"
+          : "bg-white/70 backdrop-blur-md py-3 border-b border-charcoal-100/40"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
+      <div className="w-full max-w-[100rem] mx-auto px-4 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Left Section: Logos and text branding */}
-          <a href="#" className="flex items-center space-x-3 group" onClick={(e) => {
+          <a href="#" className="flex items-center space-x-3 sm:space-x-4 group" onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}>
-            <div className="flex items-center space-x-2">
-              <UniversityLogo size={70} className="group-hover:scale-105 transition-transform duration-300" />
-              <div className="h-12 w-[1px] bg-charcoal-300/60 mx-2" />
-              <LogoCAR size={80} className="hidden sm:block opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <UniversityLogo size={68} className="flex-shrink-0 group-hover:scale-105 transition-transform duration-300" />
+              <div className="h-12 w-[1.5px] bg-charcoal-300/60 mx-1 sm:mx-2" />
+              <LogoCAR size={105} className="flex-shrink-0 block opacity-95 group-hover:opacity-100 transition-all duration-300" />
             </div>
             
-            <div className="flex flex-col">
+            <div className="flex flex-col flex-shrink-0">
               <div className="flex items-center">
-                <span className="font-black text-primary-700 text-sm tracking-widest uppercase">
+                <span className="font-black text-primary-700 text-sm sm:text-base tracking-widest uppercase">
                   CAR
                 </span>
-                <span className="text-[10px] text-charcoal-500 font-bold uppercase tracking-wider ml-1">
+                <span className="text-[10px] sm:text-xs text-charcoal-500 font-bold uppercase tracking-wider ml-1">
                   | Lab
                 </span>
               </div>
-              <span className="text-[10px] text-charcoal-900 font-semibold tracking-tight leading-none">
+              <span className="text-[10px] sm:text-[11px] text-charcoal-900 font-bold tracking-tight leading-none mt-0.5">
                 Delhi Technological University
               </span>
             </div>
