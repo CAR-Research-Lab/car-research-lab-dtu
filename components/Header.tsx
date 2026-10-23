@@ -15,8 +15,8 @@ export default function Header() {
 
   const navLinks = [
     { label: "Our Vision", href: "/#vision", id: "vision" },
-    { label: "Research", href: "/publications", id: "research" },
-    { label: "People", href: "/people", id: "people" },
+    { label: "Research", href: "/research", id: "research" },
+    { label: "People", href: "/#people", id: "people" },
     { label: "Collaboration", href: "/#collaboration", id: "collaboration" },
     { label: "Projects & Updates", href: "/#projects", id: "projects" },
     { label: "Contact", href: "/#contact", id: "contact" },

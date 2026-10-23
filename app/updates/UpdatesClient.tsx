@@ -3,7 +3,6 @@
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Preloader from "@/components/Preloader";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
@@ -19,7 +18,6 @@ interface Update {
 export default function UpdatesClient({ updates }: { updates: Update[] }) {
   return (
     <>
-      <Preloader />
       <Header />
       
       <main className="flex-grow pt-24 pb-20 bg-white min-h-screen">

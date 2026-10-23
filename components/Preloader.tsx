@@ -10,19 +10,30 @@ export default function Preloader() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Fake loading progress
+    // Check if preloader has already run during this session
+    const hasLoaded = typeof window !== "undefined" && sessionStorage.getItem("car_lab_preloader_run");
+    if (hasLoaded) {
+      setLoading(false);
+      return;
+    }
+
+    // Fake loading progress on first site visit or hard refresh
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(() => setLoading(false), 600); // Wait for transition
+          setTimeout(() => {
+            setLoading(false);
+            if (typeof window !== "undefined") {
+              sessionStorage.setItem("car_lab_preloader_run", "true");
+            }
+          }, 500);
           return 100;
         }
-        // Increment progress faster at first, then slower
-        const diff = Math.random() * 15;
+        const diff = Math.random() * 20 + 5;
         return Math.min(prev + diff, 100);
       });
-    }, 150);
+    }, 100);
 
     return () => clearInterval(timer);
   }, []);

@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Preloader from "@/components/Preloader";
 import Link from "next/link";
 import { ArrowLeft, Mail, BookOpen } from "lucide-react";
 import { getPeople } from "@/lib/datocms";
@@ -28,7 +27,6 @@ export default async function PersonProfile({ params }: { params: Promise<{ slug
 
   return (
     <>
-      <Preloader />
       <Header />
       
       <main className="flex-grow pt-24 pb-20 bg-white min-h-screen">

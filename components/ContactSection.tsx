@@ -29,18 +29,22 @@ export default function ContactSection() {
     try {
       const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL || "";
 
-      // We use 'no-cors' mode since Google Apps Script often requires it for simple POSTs
-      // without setting up full CORS headers on the Google side, though standard CORS is preferred if configured.
-      const response = await fetch(googleScriptUrl, {
+      const params = new URLSearchParams();
+      params.append("name", formData.name);
+      params.append("email", formData.email);
+      params.append("interest", formData.interest);
+      params.append("message", formData.message);
+      params.append("timestamp", new Date().toISOString());
+
+      await fetch(googleScriptUrl, {
         method: "POST",
         mode: "no-cors",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify(formData),
+        body: params.toString(),
       });
 
-      // Because of no-cors, response.ok is false and status is 0, so we just assume success if no throw
       setStatus("success");
       setFormData({ name: "", email: "", interest: "", message: "" });
     } catch (error) {

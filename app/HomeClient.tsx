@@ -14,10 +14,12 @@ import Footer from "@/components/Footer";
 export default function HomeClient({ 
   updates, 
   people, 
+  publications,
   homeBg 
 }: { 
   updates: any; 
   people: any; 
+  publications?: any[];
   homeBg?: string | null;
 }) {
   const coreValues = [
@@ -189,7 +191,7 @@ export default function HomeClient({
         </section>
 
         {/* 5. Split-Pane Dashboard (Research Pillars, Active & Upcoming Projects) */}
-        <DashboardSection />
+        <DashboardSection publications={publications} updates={updates} />
 
         {/* 6. People & Collaborations Section */}
         <PeopleSection people={people} />

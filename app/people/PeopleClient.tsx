@@ -3,7 +3,6 @@
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Preloader from "@/components/Preloader";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -45,7 +44,6 @@ export default function PeopleClient({ people }: { people: Person[] }) {
 
   return (
     <>
-      <Preloader />
       <Header />
       
       <main className="flex-grow pt-24 pb-20 bg-white min-h-screen">
