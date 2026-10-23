@@ -20,7 +20,7 @@ export default function Preloader() {
     // Lock body scroll while preloader is active to prevent page showing through
     document.body.style.overflow = "hidden";
 
-    // Smooth loading progress lasting ~2.2 - 2.5 seconds total
+    // Smooth loading progress lasting ~2.5 - 3.0 seconds total
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -31,14 +31,14 @@ export default function Preloader() {
             if (typeof window !== "undefined") {
               sessionStorage.setItem("car_lab_preloader_run", "true");
             }
-          }, 600);
+          }, 500);
           return 100;
         }
-        // Increment slower to keep animation smoothly visible for 2+ seconds
-        const diff = Math.random() * 7 + 3.5;
+        // Smooth 40ms increments taking ~2.5s to reach 100%
+        const diff = Math.random() * 1.2 + 1.0;
         return Math.min(prev + diff, 100);
       });
-    }, 110);
+    }, 40);
 
     return () => {
       clearInterval(timer);
