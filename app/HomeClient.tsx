@@ -190,8 +190,8 @@ export default function HomeClient({
           </div>
         </section>
 
-        {/* 5. Split-Pane Dashboard (Research Pillars, Active & Upcoming Projects) */}
-        <DashboardSection publications={publications} updates={updates} />
+        {/* 5. Split-Pane Dashboard (Research Pillars & Active Projects) */}
+        <DashboardSection publications={publications} />
 
         {/* 6. People & Collaborations Section */}
         <PeopleSection people={people} />

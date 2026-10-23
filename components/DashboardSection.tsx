@@ -10,7 +10,6 @@ import {
   ArrowUpRight,
   Zap,
   CheckCircle2,
-  Calendar,
   BookText,
   FileText,
 } from "lucide-react";
@@ -25,7 +24,6 @@ interface DashboardSectionProps {
 
 export default function DashboardSection({
   publications = [],
-  updates = [],
 }: DashboardSectionProps) {
   const [activeTab, setActiveTab] = useState("research");
 
@@ -37,7 +35,6 @@ export default function DashboardSection({
     { label: "Research", href: "/research", id: "research" },
     { label: "People", href: "/#people", id: "people" },
     { label: "Collaboration", href: "/#collaboration", id: "collaboration" },
-    { label: "Projects & Updates", href: "/#projects", id: "projects" },
     { label: "Contact", href: "/#contact", id: "contact" },
   ];
 
@@ -54,7 +51,6 @@ export default function DashboardSection({
         "research",
         "people",
         "collaboration",
-        "projects",
         "contact",
       ];
       for (const section of sections) {
@@ -659,90 +655,6 @@ export default function DashboardSection({
                     </a>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* 3. Upcoming Projects & Registry Updates */}
-            <div id="projects" className="scroll-mt-24">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-sm font-black tracking-widest uppercase text-charcoal-400">
-                  Upcoming Projects & Registry Updates
-                </h3>
-                <Link
-                  href="/updates"
-                  className="text-[10px] font-black uppercase tracking-widest text-primary-700 hover:text-primary-800 transition-colors flex items-center gap-1"
-                >
-                  All Updates ({updates.length}) <ArrowUpRight size={13} />
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Dynamically render top updates from DatoCMS */}
-                {updates.slice(0, 2).map((item: any) => (
-                  <div
-                    key={item.id}
-                    className="p-6 bg-white border border-charcoal-200/60 rounded-xl shadow-sm relative overflow-hidden group hover:border-primary-200 transition-all flex flex-col justify-between"
-                  >
-                    <div className="absolute top-4 right-4 text-[9px] font-bold text-primary-700 bg-primary-50 px-2 py-0.5 rounded uppercase flex items-center gap-1">
-                      <Calendar size={10} /> {item.date ? new Date(item.date).toLocaleDateString("en-US", { month: "short", year: "numeric" }) : "Live Update"}
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-black text-charcoal-900 uppercase tracking-wider pr-24">
-                        {item.title}
-                      </h4>
-                      <p className="text-xs text-charcoal-500 leading-relaxed mt-2 line-clamp-3">
-                        {item.description}
-                      </p>
-                    </div>
-                    <div className="mt-4 pt-4 border-t border-charcoal-100 flex items-center justify-between text-[10px] font-bold">
-                      <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase text-[9px]">DatoCMS Verified</span>
-                      <Link href="/updates" className="text-primary-700 hover:text-primary-800 uppercase tracking-wider flex items-center gap-1">
-                        Read Announcement <ArrowUpRight size={12} />
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-
-                {/* Fallback to roadmap projects if fewer updates */}
-                {updates.length < 2 && (
-                  <div className="p-6 bg-white border border-charcoal-200/60 rounded-xl shadow-sm relative overflow-hidden">
-                    <div className="absolute top-4 right-4 text-[9px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded uppercase flex items-center gap-1">
-                      <Calendar size={10} /> Pre-Launch
-                    </div>
-                    <h4 className="text-sm font-black text-charcoal-900 uppercase tracking-wider">
-                      AI-ETHICS-SIM
-                    </h4>
-                    <p className="text-xs text-charcoal-500 leading-relaxed mt-2">
-                      Large-scale simulation platforms evaluating decision vectors
-                      of automated highway driving models in simulated ethically
-                      complex socio-technical contexts.
-                    </p>
-                    <div className="mt-4 pt-4 border-t border-charcoal-100 flex items-center justify-between text-[10px] font-bold text-charcoal-500">
-                      <span>Target: Q4 2026</span>
-                      <span className="text-primary-700">Proposal Pending</span>
-                    </div>
-                  </div>
-                )}
-
-                {updates.length < 1 && (
-                  <div className="p-6 bg-white border border-charcoal-200/60 rounded-xl shadow-sm relative overflow-hidden">
-                    <div className="absolute top-4 right-4 text-[9px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded uppercase flex items-center gap-1">
-                      <Calendar size={10} /> Pre-Launch
-                    </div>
-                    <h4 className="text-sm font-black text-charcoal-900 uppercase tracking-wider">
-                      SAFE-AUTONOMY-TESTBED
-                    </h4>
-                    <p className="text-xs text-charcoal-500 leading-relaxed mt-2">
-                      Building DTU's hardware-in-the-loop physical validation
-                      sandbox for evaluating drone collision avoidance and sensor
-                      noise resilience under rigorous weather emulation.
-                    </p>
-                    <div className="mt-4 pt-4 border-t border-charcoal-100 flex items-center justify-between text-[10px] font-bold text-charcoal-500">
-                      <span>Target: Q1 2027</span>
-                      <span className="text-primary-700">Funding Approved</span>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           </div>
