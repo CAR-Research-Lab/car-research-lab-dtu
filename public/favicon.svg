@@ -1,0 +1,59 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="100" fill="#FFFFFF"/>
+  <rect x="8" y="8" width="496" height="496" rx="92" stroke="#7A1C1C" stroke-width="6" stroke-opacity="0.2"/>
+  
+  <g transform="translate(32, 128) scale(1.6)">
+    <!-- 1. Cogwheel / Gear on Left (representing Automation / C) -->
+    <g transform="translate(60, 80)">
+      <circle cx="0" cy="0" r="30" stroke="#7A1C1C" stroke-width="6" stroke-dasharray="10,6" />
+      <circle cx="0" cy="0" r="38" stroke="#7A1C1C" stroke-width="3" opacity="0.4" />
+      <circle cx="0" cy="0" r="22" stroke="#7A1C1C" stroke-width="4" />
+      <circle cx="0" cy="0" r="8" fill="#A3704C" />
+      <line x1="-15" y1="0" x2="15" y2="0" stroke="#7A1C1C" stroke-width="2" />
+      <line x1="0" y1="-15" x2="0" y2="15" stroke="#7A1C1C" stroke-width="2" />
+      <path d="M 22 -15 A 25 25 0 1 0 22 15" stroke="#7A1C1C" stroke-width="7" stroke-linecap="round" fill="none" />
+    </g>
+
+    <!-- 2. Drawing Compass / Divider in Center (forming the letter A) -->
+    <g transform="translate(130, 80)">
+      <circle cx="0" cy="-45" r="7" fill="#A3704C" />
+      <circle cx="0" cy="-45" r="10" stroke="#7A1C1C" stroke-width="2" />
+      <path d="M 0 -45 L -26 38 C -27 41 -23 43 -22 40 L -6 -10 Z" fill="#7A1C1C" />
+      <path d="M 0 -45 L 26 38 C 27 41 23 43 22 40 L 6 -10 Z" fill="#7A1C1C" />
+      <line x1="-24" y1="36" x2="-28" y2="48" stroke="#A3704C" stroke-width="2" />
+      <line x1="24" y1="36" x2="28" y2="48" stroke="#A3704C" stroke-width="2" />
+      <path d="M -22 10 L 22 10" stroke="#A3704C" stroke-width="3.5" stroke-linecap="round" />
+      <circle cx="0" cy="10" r="5" fill="#7A1C1C" />
+      <path d="M -12 22 L 12 22" stroke="#7A1C1C" stroke-width="4.5" />
+    </g>
+
+    <!-- 3. Ashoka Chakra / Letter R on Right -->
+    <g transform="translate(200, 80)">
+      <circle cx="0" cy="-15" r="20" stroke="#7A1C1C" stroke-width="3" />
+      <circle cx="0" cy="-15" r="16" stroke="#A3704C" stroke-width="1" />
+      
+      <!-- 24 Spokes of Chakra -->
+      <line x1="0" y1="-15" x2="18.0000" y2="-15.0000" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="15.5885" y2="-6.0000" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="9.0000" y2="0.5885" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="0.0000" y2="3.0000" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="-9.0000" y2="0.5885" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="-15.5885" y2="-6.0000" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="-18.0000" y2="-15.0000" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="-15.5885" y2="-24.0000" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="-9.0000" y2="-30.5885" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="-0.0000" y2="-33.0000" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="9.0000" y2="-30.5885" stroke="#7A1C1C" stroke-width="1.2" />
+      <line x1="0" y1="-15" x2="15.5885" y2="-24.0000" stroke="#7A1C1C" stroke-width="1.2" />
+      <circle cx="0" cy="-15" r="4.5" fill="#7A1C1C" />
+
+      <!-- Letter R spine and loops -->
+      <rect x="-26" y="-38" width="7.5" height="78" fill="#7A1C1C" rx="1" />
+      <path d="M -22 -35 C 5 -35 15 -25 15 -12 C 15 1 -5 10 -22 10" stroke="#7A1C1C" stroke-width="7.5" stroke-linecap="round" fill="none" />
+      <path d="M -5 8 L 16 38" stroke="#7A1C1C" stroke-width="7.5" stroke-linecap="round" />
+      <line x1="-20" y1="18" x2="0" y2="18" stroke="#A3704C" stroke-width="3" />
+      <line x1="-20" y1="26" x2="-5" y2="26" stroke="#A3704C" stroke-width="3" />
+    </g>
+    <path d="M 10 120 L 270 120" stroke="#7A1C1C" stroke-width="1" stroke-dasharray="4,6" opacity="0.3" />
+  </g>
+</svg>
