@@ -8,6 +8,16 @@ You wanted a system with low maintenance overhead where content can be updated d
 - **Making Changes:** Simply click "Create New Record", fill in the text fields (e.g., Name, Research Focus), upload an image, and click "Publish".
 - **No Coding Required:** The website automatically pulls this data. You do not need to edit any files or code to add a new PhD scholar or post a new announcement.
 
+### People Section Hierarchy:
+When adding or editing a profile in the **People** model in DatoCMS, set the **Category** field to one of the 5 official hierarchy tiers:
+1. `Lab Leads/ PI` (or `leads`) → Displays in **Lab Leads / PI**
+2. `PhD Scholars` (or `phd`) → Displays in **PhD Scholars**
+3. `MTech Students / Post Graduate` (or `postgrad`) → Displays in **MTech Students / Post Graduate**
+4. `Undergrad students` (or `undergrad`) → Displays in **Undergrad Students**
+5. `Alumni` (or `alumni`) → Displays in **Alumni**
+
+*(Note: The system also automatically normalizes common casing, abbreviations, or infers from the role if category is left blank).*
+
 ## 2. Automatic Deployments (Vercel or Netlify)
 To ensure the website stays fast and updates automatically when you change content in DatoCMS, we strongly recommend deploying on **Vercel** (or Netlify).
 - **GitHub Integration:** You connect your GitHub repository to Vercel. Whenever code is updated, Vercel automatically deploys the site.

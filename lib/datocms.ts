@@ -125,6 +125,105 @@ export async function getPublications() {
   }
 }
 
+export type PersonCategory = "leads" | "phd" | "postgrad" | "undergrad" | "alumni";
+
+export function normalizePersonCategory(
+  category?: string | null,
+  role?: string | null
+): PersonCategory {
+  const cat = (category || "").toLowerCase().trim();
+  const r = (role || "").toLowerCase().trim();
+
+  // 1. Lab Leads / PI
+  if (
+    cat.includes("lead") ||
+    cat.includes("pi") ||
+    cat.includes("faculty") ||
+    cat.includes("head") ||
+    cat.includes("director") ||
+    cat.includes("prof")
+  ) {
+    return "leads";
+  }
+
+  // 2. PhD Scholars
+  if (cat.includes("phd") || cat.includes("ph.d") || cat.includes("doctor")) {
+    return "phd";
+  }
+
+  // 3. MTech Students / Post Graduate
+  if (
+    cat.includes("mtech") ||
+    cat.includes("m.tech") ||
+    cat.includes("postgrad") ||
+    cat.includes("post graduate") ||
+    cat.includes("master") ||
+    cat.includes("pg")
+  ) {
+    return "postgrad";
+  }
+
+  // 4. Undergrad students
+  if (
+    cat.includes("undergrad") ||
+    cat.includes("btech") ||
+    cat.includes("b.tech") ||
+    cat.includes("bachelor") ||
+    cat.includes("ug")
+  ) {
+    return "undergrad";
+  }
+
+  // 5. Alumni
+  if (
+    cat.includes("alumn") ||
+    cat.includes("alum") ||
+    cat.includes("former") ||
+    cat.includes("past")
+  ) {
+    return "alumni";
+  }
+
+  // Fallback to role inference if category was not set
+  if (
+    r.includes("prof") ||
+    r.includes("lead") ||
+    r.includes("pi") ||
+    r.includes("head") ||
+    r.includes("faculty") ||
+    r.includes("director")
+  ) {
+    return "leads";
+  }
+  if (r.includes("phd") || r.includes("ph.d") || r.includes("doctor")) {
+    return "phd";
+  }
+  if (
+    r.includes("mtech") ||
+    r.includes("m.tech") ||
+    r.includes("master") ||
+    r.includes("postgrad")
+  ) {
+    return "postgrad";
+  }
+  if (r.includes("btech") || r.includes("b.tech") || r.includes("undergrad")) {
+    return "undergrad";
+  }
+  if (r.includes("alumn") || r.includes("alum")) {
+    return "alumni";
+  }
+
+  return "leads";
+}
+
+const HIERARCHY_ORDER: Record<PersonCategory, number> = {
+  leads: 1,
+  phd: 2,
+  postgrad: 3,
+  undergrad: 4,
+  alumni: 5,
+};
+
 export async function getPeople() {
   try {
     const query = `
@@ -147,11 +246,16 @@ export async function getPeople() {
     const data = await performRequest({ query });
 
     const people = data?.allPeople || [];
-    return people.map((p: any) => ({
-      ...p,
-      // Default to 'heads' if they forgot to type the category
-      category: p.category ? p.category.toLowerCase().trim() : "heads",
-    }));
+    return people
+      .map((p: any) => ({
+        ...p,
+        category: normalizePersonCategory(p.category, p.role),
+      }))
+      .sort((a: any, b: any) => {
+        const orderA = HIERARCHY_ORDER[a.category as PersonCategory] || 99;
+        const orderB = HIERARCHY_ORDER[b.category as PersonCategory] || 99;
+        return orderA - orderB;
+      });
   } catch (error) {
     console.error("Failed to fetch people from DatoCMS:", error);
     return [];

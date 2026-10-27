@@ -15,6 +15,7 @@ When the Lab Manager asks you (Claude / ChatGPT) to make updates, strictly follo
 ## 2. Dynamic Content (DatoCMS)
 
 - The website is integrated with DatoCMS. If the user asks to "update the text of an announcement" or "add a new team member", first remind them that this can be done **directly in the DatoCMS dashboard** without writing code.
+- **People Hierarchy:** Profiles belong to 5 ordered categories: `leads` (Lab Leads / PI), `phd` (PhD Scholars), `postgrad` (MTech Students / Post Graduate), `undergrad` (Undergrad students), and `alumni` (Alumni). Normalization is handled automatically in `lib/datocms.ts`.
 - If they need to change _how_ the data is fetched or displayed, you will need to edit the `lib/datocms.ts` (GraphQL fetch queries) or the relevant React Component in `app/`.
 
 ## 3. Deployment (Vercel / Netlify)
