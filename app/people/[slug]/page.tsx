@@ -72,15 +72,15 @@ export default async function PersonProfile({ params }: { params: Promise<{ slug
               {/* Info */}
               <div className="flex-grow text-center md:text-left pt-4">
                 <span className="text-[10px] font-black uppercase tracking-widest text-primary-700 bg-primary-50 px-3 py-1.5 rounded-full inline-block mb-4">
-                  {person.category === "leads" || person.category === "heads"
-                    ? "Lab Lead / PI"
-                    : person.category === "phd"
+                  {person.category === "leads" || person.category === "heads" || person.category === "first"
+                    ? "Lab Lead"
+                    : person.category === "phd" || person.category === "second"
                     ? "PhD Scholar"
-                    : person.category === "postgrad"
-                    ? "MTech / Post Graduate"
-                    : person.category === "undergrad"
-                    ? "Undergrad Student"
-                    : person.category === "alumni"
+                    : person.category === "postgrad" || person.category === "third"
+                    ? "MTech Student"
+                    : person.category === "undergrad" || person.category === "fourth"
+                    ? "Undergraduate Student"
+                    : person.category === "alumni" || person.category === "fifth"
                     ? "Alumni Profile"
                     : "Researcher Profile"}
                 </span>

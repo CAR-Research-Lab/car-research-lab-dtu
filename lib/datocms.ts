@@ -134,8 +134,10 @@ export function normalizePersonCategory(
   const cat = (category || "").toLowerCase().trim();
   const r = (role || "").toLowerCase().trim();
 
-  // 1. Lab Leads / PI
+  // 1. Lab Lead / PI
   if (
+    cat === "first" ||
+    cat === "1" ||
     cat.includes("lead") ||
     cat.includes("pi") ||
     cat.includes("faculty") ||
@@ -147,12 +149,20 @@ export function normalizePersonCategory(
   }
 
   // 2. PhD Scholars
-  if (cat.includes("phd") || cat.includes("ph.d") || cat.includes("doctor")) {
+  if (
+    cat === "second" ||
+    cat === "2" ||
+    cat.includes("phd") ||
+    cat.includes("ph.d") ||
+    cat.includes("doctor")
+  ) {
     return "phd";
   }
 
   // 3. MTech Students / Post Graduate
   if (
+    cat === "third" ||
+    cat === "3" ||
     cat.includes("mtech") ||
     cat.includes("m.tech") ||
     cat.includes("postgrad") ||
@@ -165,6 +175,8 @@ export function normalizePersonCategory(
 
   // 4. Undergrad students
   if (
+    cat === "fourth" ||
+    cat === "4" ||
     cat.includes("undergrad") ||
     cat.includes("btech") ||
     cat.includes("b.tech") ||
@@ -176,6 +188,8 @@ export function normalizePersonCategory(
 
   // 5. Alumni
   if (
+    cat === "fifth" ||
+    cat === "5" ||
     cat.includes("alumn") ||
     cat.includes("alum") ||
     cat.includes("former") ||
@@ -237,6 +251,7 @@ export async function getPeople() {
           bio
           category
           initials
+          _createdAt
           image {
             url
           }
@@ -252,9 +267,17 @@ export async function getPeople() {
         category: normalizePersonCategory(p.category, p.role),
       }))
       .sort((a: any, b: any) => {
+        // Primary sort: Hierarchy tier (1. Lab Lead -> 2. PhD -> 3. MTech -> 4. Undergrad -> 5. Alumni)
         const orderA = HIERARCHY_ORDER[a.category as PersonCategory] || 99;
         const orderB = HIERARCHY_ORDER[b.category as PersonCategory] || 99;
-        return orderA - orderB;
+        if (orderA !== orderB) {
+          return orderA - orderB;
+        }
+
+        // Secondary sort within the same tier: Order of addition in backwards direction (newest additions first)
+        const timeA = a._createdAt ? new Date(a._createdAt).getTime() : 0;
+        const timeB = b._createdAt ? new Date(b._createdAt).getTime() : 0;
+        return timeB - timeA;
       });
   } catch (error) {
     console.error("Failed to fetch people from DatoCMS:", error);
